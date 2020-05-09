@@ -1,5 +1,6 @@
 package com.test.jpa.hibernate.demo;
 
+import com.test.jpa.hibernate.demo.entity.Course;
 import com.test.jpa.hibernate.demo.repository.CourseRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,5 +23,9 @@ public class DemoApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		logger.info("Search result -> {} ", courseRepository.findById(100));
+		courseRepository.deleteById(100);
+		logger.info("Save course into DB-> {}",courseRepository.save(new Course( 12L,"AWS")));
+		logger.info("upate a course in the DB -> {}",courseRepository.save(new Course(101L,"GCP")));
+		courseRepository.tracking();
 	}
 }
