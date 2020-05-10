@@ -1,11 +1,13 @@
 package com.test.jpa.hibernate.demo.entity;
 
 import org.hibernate.annotations.*;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @javax.persistence.Entity
 @javax.persistence.Table(name = "COURSE")
@@ -27,6 +29,31 @@ public class Course {
     private LocalDateTime createdDate;
     @UpdateTimestamp
     private LocalDateTime updatedDate;
+
+    @OneToMany(mappedBy = "course")
+    private List<Review> review=new ArrayList<>();
+    @ManyToMany(mappedBy = "courses")
+    private List<Student> students=new ArrayList<>();
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void addStudents(Student student) {
+        this.students.add(student);
+    }
+
+    public void addReview(Review review) {
+        this.review.add(review);
+    }
+
+    public void removeReview(Review review) {
+        this.review.remove(review);
+    }
+
+    public List<Review> getReview() {
+        return review;
+    }
 
     protected Course(){
 

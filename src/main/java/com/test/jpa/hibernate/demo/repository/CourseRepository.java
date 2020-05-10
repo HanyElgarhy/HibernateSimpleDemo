@@ -1,11 +1,13 @@
 package com.test.jpa.hibernate.demo.repository;
 
 import com.test.jpa.hibernate.demo.entity.Course;
+import com.test.jpa.hibernate.demo.entity.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -29,6 +31,16 @@ public class CourseRepository {
             entityManager.merge(course);
         }
         return course;
+    }
+
+    public void addReviewsToCourse(Long courseId, List<Review> reviews){
+        Course course = findById(courseId);
+        for(Review review: reviews){
+            course.addReview(review);
+            review.setCourse(course);
+            entityManager.persist(review);
+        }
+
     }
     //Below what will be saved in Tintin 2 because Entity manager will keep track of the transaction @transactional
     public void tracking(){
