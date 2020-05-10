@@ -13,3 +13,8 @@ insert into student (id,name,passport_id) values(1002,'Jennifer',2002)
 insert into review (id,rating,description,course_id) values(3000,'1','Amazing',100)
 insert into review (id,rating,description,course_id) values(3001,'2','Poor course',101)
 insert into review (id,rating,description,course_id) values(3002,'3','not bad',102)
+
+insert into student_course (student_id,course_id) values (1000,102)
+insert into student_course (student_id,course_id) values (1000,101)
+insert into student_course (student_id,course_id) values (1000,100)
+insert into student_course (student_id,course_id) values (1002,102)

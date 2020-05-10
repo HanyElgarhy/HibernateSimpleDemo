@@ -35,7 +35,7 @@ public class DemoApplication implements CommandLineRunner {
 	@Override
 	@Transactional
 	public void run(String... args) throws Exception {
-
+		studentRepository.insertStudentAndCourse(new Student("jack"),new Course("lol"));
 		Course course = courseRepository.findById(100);
 		Student tom = new Student("Tom");
 		course.addStudents(tom);

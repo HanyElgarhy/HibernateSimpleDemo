@@ -41,5 +41,12 @@ public class StudentRepositoryTest {
         logger.info(" passport get student {}",passport1.getStudent());
 
     }
+    @Test
+    @Transactional
+    public void retrieveStudent(){
+        Student student = entityManager.find(Student.class, 1000l);
+        logger.info(" student is {}", student);
+        logger.info("Student courses {}",student.getCourses());
+    }
 
 }

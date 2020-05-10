@@ -30,6 +30,12 @@ public class StudentRepository {
             entityManager.merge(student);
         return student;
     }
+    public void insertStudentAndCourse(Student student, Course course){
+        student.addCourses(course);
+        course.addStudents(student);
+        entityManager.persist(student);
+        entityManager.persist(course);
+    }
 
     public void tracking(){
         Passport passport = new Passport("EN120");
