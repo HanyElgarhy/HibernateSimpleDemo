@@ -34,6 +34,25 @@ public class Student {
     @JoinTable(name="STUDENT_COURSE",joinColumns = @JoinColumn(name = "STUDENT_ID"),inverseJoinColumns = @JoinColumn(name = "COURSE_ID"))
     private List<Course> courses=new ArrayList<>();
 
+    public Address getAddress() {
+        return address;
+    }
+
+    @Embedded
+    private Address address;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     public List<Course> getCourses() {
         return courses;
     }

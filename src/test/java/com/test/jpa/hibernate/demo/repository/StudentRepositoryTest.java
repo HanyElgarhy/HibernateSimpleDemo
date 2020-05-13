@@ -1,5 +1,6 @@
 package com.test.jpa.hibernate.demo.repository;
 
+import com.test.jpa.hibernate.demo.entity.Address;
 import com.test.jpa.hibernate.demo.entity.Passport;
 import com.test.jpa.hibernate.demo.entity.Student;
 import org.junit.Test;
@@ -44,9 +45,17 @@ public class StudentRepositoryTest {
     @Test
     @Transactional
     public void retrieveStudent(){
-        Student student = entityManager.find(Student.class, 1000l);
+        Student student = entityManager.find(Student.class, 1000L);
         logger.info(" student is {}", student);
         logger.info("Student courses {}",student.getCourses());
+    }
+    @Test
+    @Transactional
+    public void setAddressDetails(){
+        Student student= entityManager.find(Student.class,1000L);
+        student.setAddress(new Address("Montreal","Lajeunesse","666"));
+        entityManager.flush();
+        logger.info(" student and address {}", student.getAddress());
     }
 
 
