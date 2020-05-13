@@ -1,6 +1,7 @@
-insert into course (id,name,created_date,updated_date) values (100,'Spring',sysdate,sysdate)
-insert into course (id,name,created_date,updated_date) values (101,'Java',sysdate,sysdate)
-insert into course (id,name,created_date,updated_date) values (102,'C++',sysdate,sysdate)
+insert into course (id,name,created_date,updated_date,is_deleted) values (100,'Spring',sysdate,sysdate,false)
+insert into course (id,name,created_date,updated_date,is_deleted) values (101,'Java',sysdate,sysdate,false)
+insert into course (id,name,created_date,updated_date,is_deleted) values (102,'C++',sysdate,sysdate,false)
+insert into course (id,name,created_date,updated_date,is_deleted) values (103,'GCP',sysdate,sysdate,false)
 
 insert into passport (id,number) values(2000,'E2020')
 insert into passport (id,number) values(2001,'E2021')

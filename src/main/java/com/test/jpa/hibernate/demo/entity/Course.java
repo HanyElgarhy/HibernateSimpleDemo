@@ -3,6 +3,7 @@ package com.test.jpa.hibernate.demo.entity;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
+import org.springframework.jdbc.object.SqlQuery;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -17,6 +18,8 @@ import java.util.List;
                 @NamedQuery(name = "second_SQL", query = " select c from Course c where name like '%Java'")
         }
 )
+@SQLDelete(sql = "update course set delete_id=true where id=? ")
+@Where(clause = "is_deleted=false")
 public class Course {
     @Id
     @GeneratedValue
@@ -34,6 +37,8 @@ public class Course {
     private List<Review> review=new ArrayList<>();
     @ManyToMany(mappedBy = "courses")
     private List<Student> students=new ArrayList<>();
+
+    private boolean isDeleted;
 
     public List<Student> getStudents() {
         return students;

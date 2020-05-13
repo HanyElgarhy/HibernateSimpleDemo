@@ -60,5 +60,19 @@ public class JPQLTest {
 		List<Course> resultList1 = nativeQuery1.getResultList();
 		logger.info(" result1 ->{}",resultList1);
 	}
+	@Test
+	public void courses_without_students(){
+		Query query = entityManager.createQuery("select c from Course c where c.students is empty");
+		logger.info("courses without students {}",query.getResultList());
+	}
+	@Test
+	public void left_join(){
+		Query query = entityManager.createQuery("Select c, s from Course c LEFT JOIN c.students s");
+		List<Object[]> resultList= query.getResultList();
+		logger.info(" Result size equal {}", resultList.size());
+		for(Object[]  result : resultList){
+			logger.info(" Course {} Student {}", result[0], result[1]);
+		}
+	}
 
 }

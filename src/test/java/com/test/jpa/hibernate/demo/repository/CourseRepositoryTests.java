@@ -12,7 +12,13 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -50,5 +56,24 @@ class CourseRepositoryTests {
 		Review review = entityManager.find(Review.class, 3000l);
 		logger.info(" review.getcourse {}",review.getCourse());
 	}
+	@Test
+	public void criteria_basic_query(){
+		// Select c from Course c
+		//1 Use criteria builder to create a criteria query 
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Course> cq = criteriaBuilder.createQuery(Course.class);
+		//2 Define root for tables that are involved in query
+		Root<Course> courseRoot = cq.from(Course.class);
+		//5 Build the TypedQuery using the entity manager and criteria query
+		TypedQuery<Course> query = entityManager.createQuery(cq.select(courseRoot));
+		List<Course> resultList = query.getResultList();
+	}
+	@org.junit.Test
+	@Transactional
+	public void removeCourse(){
+		entityManager.remove(100);
+		logger.info("find course {}",courseRepository.findById(100));
+	}
+
 
 }
